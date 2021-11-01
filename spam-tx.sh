@@ -19,10 +19,10 @@ for (( ;; )); do
                 sleep 1
         done
         BAL=$(nibirud query bank balances ${DELEGATOR} --node ${NODE} -o json | jq -r '.balances | .[].amount');
-        echo -e "BALANCE: ${GREEN}${BAL}${NC} uatolo\n"
+        echo -e "BALANCE: ${GREEN}${BAL}${NC} ugame\n"
         echo -e "Stake ALL\n"
-        echo -e "${PASWD}\n${PASWD}\n" | nibirud tx staking delegate ${VALIDATOR} ${BAL}ugame --chain-id neuron-1 --from ${ACC_NAME} --node ${NODE} -y --fees 20ugame
-        for (( timer=${DELAY}; timer>0; timer-- ))
+        echo -e "${PASWD}\n${PASWD}\n" | nibirud tx bank send ${ACC_NAME} ${DELEGATOR} 100ugame --chain-id neuron-1 --node ${NODE} -y --fees 50ugame
+        for (( timer=63; timer>0; timer-- ))
         do
                 printf "* sleep for ${RED}%02d${NC} sec\r" $timer
                 sleep 1
